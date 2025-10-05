@@ -270,6 +270,13 @@
 
 ---
 
+##### useEffect 清楚副作用补充（卸载时）：
+
+![alt text](image-207.png)
+![alt text](image-208.png)
+在上面这种情况下，点击卸载组件时子组件中的副作用中的定时器不会关闭，要想清除这个副作用，就得卸载：
+![alt text](image-209.png)
+
 #### useEffect 的应用--发送请求：
 
 ##### 待办任务清单二：
@@ -284,6 +291,10 @@
 ![alt text](image-101.png)
 
 ---
+
+### 自定义 hook 使用：
+
+![alt text](image-210.png)
 
 ### React Hooks 总结：
 
@@ -354,3 +365,67 @@
 > ![alt text](image-127.png)
 
 ![alt text](image-124.png)
+
+## Redux:
+
+![alt text](image-211.png)
+![alt text](image-212.png)
+
+### Redux 与 React 的链接：
+
+![alt text](image-213.png)
+![alt text](image-214.png)
+![alt text](image-215.png)
+
+#### 配置目录：
+
+![alt text](image-216.png)
+![alt text](image-217.png)
+
+#### 整体路径：
+
+![alt text](image-220.png)
+
+#### 创建 store(使用 createSlice):
+
+![alt text](image-221.png)
+
+##### 示例：
+
+![alt text](image-222.png)
+![alt text](image-223.png)
+![alt text](image-224.png)
+注：
+![alt text](image-218.png)这两个小函数是用来生成 action 对象的。
+
+#### React 组件中使用 store 中的数据（useSelector）：
+
+![alt text](image-225.png)
+
+##### 示例 App.js:
+
+![alt text](image-226.png)
+
+#### React 组件中修改 store 中的数据(useDispatch)：
+
+![alt text](image-227.png)
+
+##### App.js 示例：
+
+![alt text](image-228.png)
+
+#### 总结：
+
+![alt text](image-229.png)
+
+#### 提交 action 传参实现需求（payload 属性）：
+
+![alt text](image-230.png)
+
+---
+
+#### 异步状态操作：
+
+![alt text](image-231.png)
+![alt text](image-232.png)
+注：![alt text](image-219.png)异步生成的是 action 函数。
