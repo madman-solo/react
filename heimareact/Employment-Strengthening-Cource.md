@@ -134,7 +134,7 @@ https://lamphc.github.io/fe-up/#/JavaScript/BOM
 
 ![alt text](image-171.png)
 
-### 8.服务器发送事件：
+### 8.服务器发送事件（SSE）：
 
 #### ChatGpt 打字效果-EventSource（建立 SSE 连接）：
 
@@ -150,7 +150,10 @@ https://lamphc.github.io/fe-up/#/JavaScript/BOM
 
 ###### 关闭连接：![alt text](image-179.png)
 
-#### 总结：SSE 适用于简单前端场景，只有 Get 方法，写在路径参数中；更复杂的场景用 fetch
+#### 总结：SSE 适用于简单前端场景，只有 Get 方法，写在路径参数中；更复杂的场景要结合 fetch：
+
+在实际项目中，两者甚至可以配合使用：
+比如，前端先用 fetch 向后端发起一个 POST 请求（提交用户的订阅信息，比如 “订阅股票 A 的行情”），后端处理后，前端再用 SSE 发起一个 GET 连接，后端通过这个 SSE 连接，持续向客户端推送股票 A 的实时行情。这里 fetch 负责 “主动提交订阅需求”，SSE 负责 “被动接收实时数据”，两者各司其职。
 
 ##### fetch:
 

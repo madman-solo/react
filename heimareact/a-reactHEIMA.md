@@ -216,7 +216,7 @@
 ![alt text](image-78.png)
 ![alt text](image-79.png)
 
-#### 非父子组件通讯--后代关系：
+#### 非父子组件通讯--后代关系(Context 上下文)：
 
 ![alt text](image-80.png)
 ![alt text](image-81.png)
@@ -368,8 +368,12 @@
 
 ## Redux:
 
-![alt text](image-211.png)
-![alt text](image-212.png)
+Redux 是一个独立的状态管理库，并非 React 内置，它的设计思想基于：
+
+- 单一状态树（Single Source of Truth）
+- 状态只读（Immutable）
+- 通过纯函数（reducer）修改状态
+  ![alt text](image-212.png)
 
 ### Redux 与 React 的链接：
 
@@ -429,3 +433,158 @@
 ![alt text](image-231.png)
 ![alt text](image-232.png)
 注：![alt text](image-219.png)异步生成的是 action 函数。
+
+### Redux 与 React 的链接总结版：
+
+在 Redux 中，`Provider` 是 `react-redux` 库提供的核心组件，它的主要作用是将 Redux 的 `store` 传递给应用中所有需要访问状态的组件，无需通过 props 层层传递。这是 Redux 与 React 应用连接的关键环节。
+
+### 基本用法步骤：
+
+1. **安装依赖**  
+   首先确保已安装 `react-redux`（需配合 Redux 核心库使用）：
+
+   ```bash
+   npm install redux react-redux
+   # 或使用 yarn
+   yarn add redux react-redux
+   ```
+
+2. **创建 Redux Store**  
+   先定义 reducer 并创建 store（这是 Redux 的基础准备工作）：
+
+   ```javascript
+   // store.js
+   import { createStore } from "redux";
+
+   // 定义初始状态和 reducer
+   const initialState = { count: 0 };
+   function counterReducer(state = initialState, action) {
+     switch (action.type) {
+       case "INCREMENT":
+         return { ...state, count: state.count + 1 };
+       default:
+         return state;
+     }
+   }
+
+   // 创建 store
+   const store = createStore(counterReducer);
+   export default store;
+   ```
+
+3. **使用 Provider 包裹应用**  
+   在应用的根组件（通常是 `App` 组件）外层用 `Provider` 包裹，并传入 `store`：
+
+   ```jsx
+   // index.js
+   import React from "react";
+   import ReactDOM from "react-dom";
+   import { Provider } from "react-redux"; // 导入 Provider
+   import store from "./store"; // 导入创建好的 store
+   import App from "./App";
+
+   // 用 Provider 包裹根组件，并传入 store
+   ReactDOM.render(
+     <Provider store={store}>
+       <App />
+     </Provider>,
+     document.getElementById("root")
+   );
+   ```
+
+4. **子组件中访问 store**  
+   被 `Provider` 包裹的所有子组件，都可以通过 `react-redux` 提供的 `useSelector` 和 `useDispatch` 钩子访问 store 中的状态或触发状态更新：
+
+   ```jsx
+   // Counter.js
+   import { useSelector, useDispatch } from "react-redux";
+
+   function Counter() {
+     // 获取 store 中的状态
+     const count = useSelector((state) => state.count);
+     // 获取 dispatch 方法
+     const dispatch = useDispatch();
+
+     return (
+       <div>
+         <p>计数：{count}</p>
+         <button onClick={() => dispatch({ type: "INCREMENT" })}>增加</button>
+       </div>
+     );
+   }
+   ```
+
+### Provider 的核心作用：
+
+- **传递 store 上下文**：`Provider` 内部利用 React 的 Context API 创建了一个全局上下文，将 `store` 放入其中，使得所有子组件都能访问到 `store`。
+- **简化状态访问**：避免了手动将 `store` 通过 props 逐层传递给子组件的繁琐操作。
+- **支持响应式更新**：当 `store` 中的状态发生变化时，使用 `useSelector` 订阅状态的组件会自动重新渲染。
+
+### 注意事项：
+
+- **一个应用通常只需要一个 Provider**：将其放在应用的最顶层（如 `index.js` 中），确保所有组件都能访问到 `store`。
+- **必须传入 store 属性**：`Provider` 组件必须接收 `store` 作为 props，否则会报错。
+- **与 Context API 的关系**：`Provider` 本质上是对 React Context 的封装，但其设计目的是专门为 Redux 的 `store` 提供全局访问能力。
+
+通过 `Provider`，Redux 实现了与 React 应用的无缝集成，让状态管理变得更加简洁高效。
+
+---
+
+![alt text](image-233.png)action 和 reducer 的关系?
+
+#### 异步状态操作请求：
+
+![alt text](image-234.png)
+![alt text](image-235.png)
+![alt text](image-236.png)
+![alt text](image-240.png)
+
+---
+
+![alt text](image-237.png)
+![alt text](image-239.png)
+![alt text](image-238.png)
+![alt text](image-241.png)
+![alt text](image-242.png)
+点击分类激活交互效果实现：
+![alt text](image-243.png)
+![alt text](image-244.png)
+![alt text](image-245.png)
+![alt text](image-246.png)
+![alt text](image-247.png)
+商品列表切换显示:
+![alt text](image-248.png)
+![alt text](image-249.png)
+购物车：
+action.payload 代表当前拿到的对象？
+![alt text](image-250.png)
+![alt text](image-251.png)
+![alt text](image-252.png)
+![alt text](image-253.png)
+![alt text](image-254.png)
+![alt text](image-255.png)
+![alt text](image-256.png)
+![alt text](image-257.png)
+![alt text](image-258.png)
+![alt text](image-259.png)
+
+---
+
+![alt text](image-260.png)
+![alt text](image-261.png)
+![alt text](image-262.png)
+![alt text](image-263.png)
+![alt text](image-264.png)
+控制购物车显示和隐藏：
+![alt text](image-265.png)
+![alt text](image-266.png)
+![alt text](image-267.png)
+![alt text](image-268.png)
+遮罩层改为：
+
+```js
+visible && "visible";
+```
+
+![alt text](image-270.png)
+![alt text](image-271.png)
