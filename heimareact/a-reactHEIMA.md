@@ -532,7 +532,7 @@ Redux 是一个独立的状态管理库，并非 React 内置，它的设计思�
 
 ![alt text](image-233.png)action 和 reducer 的关系?
 
-#### 异步状态操作请求：
+### 异步状态操作请求：
 
 ![alt text](image-234.png)
 ![alt text](image-235.png)
@@ -541,22 +541,30 @@ Redux 是一个独立的状态管理库，并非 React 内置，它的设计思�
 
 ---
 
+### 购物车案例：
+
 ![alt text](image-237.png)
 ![alt text](image-239.png)
 ![alt text](image-238.png)
 ![alt text](image-241.png)
 ![alt text](image-242.png)
-点击分类激活交互效果实现：
+
+#### 点击分类激活交互效果实现：
+
 ![alt text](image-243.png)
 ![alt text](image-244.png)
 ![alt text](image-245.png)
 ![alt text](image-246.png)
 ![alt text](image-247.png)
-商品列表切换显示:
+
+#### 商品列表切换显示:
+
 ![alt text](image-248.png)
 ![alt text](image-249.png)
-购物车：
-action.payload 代表当前拿到的对象？
+
+#### 购物车：
+
+action.payload 代表当前拿到的对象。
 ![alt text](image-250.png)
 ![alt text](image-251.png)
 ![alt text](image-252.png)
@@ -575,12 +583,15 @@ action.payload 代表当前拿到的对象？
 ![alt text](image-262.png)
 ![alt text](image-263.png)
 ![alt text](image-264.png)
-控制购物车显示和隐藏：
+
+##### 控制购物车显示和隐藏：
+
 ![alt text](image-265.png)
 ![alt text](image-266.png)
 ![alt text](image-267.png)
 ![alt text](image-268.png)
-遮罩层改为：
+
+###### 遮罩层改为：
 
 ```js
 visible && "visible";
@@ -588,3 +599,66 @@ visible && "visible";
 
 ![alt text](image-270.png)
 ![alt text](image-271.png)
+
+## 路由（React Router）：
+
+![alt text](image-272.png)
+![alt text](image-273.png)
+![alt text](image-274.png)
+index.js:
+![alt text](image-275.png)
+![alt text](image-276.png)
+
+### 抽象路由模块：
+
+![alt text](image-277.png)
+![alt text](image-278.png)
+![alt text](image-279.png)
+
+### 路由导航：
+
+![alt text](image-280.png)
+
+##### 声明式导航（Link，to）：
+
+![alt text](image-281.png)
+![alt text](image-282.png)
+
+##### 编程式导航（useNavigate）：
+
+![alt text](image-283.png)
+![alt text](image-284.png)
+
+### 导航传参：
+
+#### searchParams 传参：
+
+![alt text](image-285.png)
+![alt text](image-286.png)
+
+#### parmas 传参：
+
+![alt text](image-287.png)
+![alt text](image-288.png)
+注意：用 parmas 传参时要在 router 中进行占位：
+![alt text](image-289.png)
+
+### 嵌套路由配置（children:[]+\<Outlet/>）：
+
+![alt text](image-290.png)
+![alt text](image-291.png)
+![alt text](image-292.png)
+![alt text](image-293.png)
+
+#### 默认二级路由(index:true)：
+
+![alt text](image-294.png)
+![alt text](image-295.png)
+
+### 404 路由配置（NotFound 组件+path:'\*'）：
+
+![alt text](image-296.png)
+
+### 两种路由模式（history 模式,hash 模式）：
+
+![alt text](image-297.png)
