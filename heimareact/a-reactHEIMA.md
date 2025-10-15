@@ -662,3 +662,104 @@ index.js:
 ### 两种路由模式（history 模式,hash 模式）：
 
 ![alt text](image-297.png)
+
+## 记账本：
+
+![alt text](image-298.png)
+![alt text](image-299.png)
+![alt text](image-300.png)
+![alt text](image-301.png)
+![alt text](image-302.png)
+
+---
+
+![alt text](image-303.png)启动这个 json server 服务执行的是:npm run server;这和 express 做后端，启动时的区别除了一个是虚拟后端一个是真的后端之外还有没有什么？
+
+---
+
+### 数据 Mock 实现：
+
+![alt text](image-304.png)
+![alt text](image-305.png)
+![alt text](image-306.png)
+
+### 整体路由设计
+
+![alt text](image-307.png)
+![alt text](image-308.png)
+![alt text](image-309.png)
+![alt text](image-310.png)
+![alt text](image-311.png)
+![alt text](image-312.png)
+
+### antd-mobile 主题定制：
+
+![alt text](image-313.png)
+![alt text](image-314.png)
+![alt text](image-315.png)
+![alt text](image-317.png)
+
+---
+
+![alt text](image-316.png)
+![alt text](image-318.png)
+![alt text](image-319.png)
+![alt text](image-320.png)
+![alt text](image-321.png)
+![alt text](image-322.png)
+![alt text](image-323.png)
+![alt text](image-324.png)
+![alt text](image-325.png)
+
+---
+
+![alt text](image-326.png)
+![alt text](image-327.png)
+![alt text](image-328.png)
+![alt text](image-329.png)
+
+---
+
+![alt text](image-333.png)
+![alt text](image-334.png)
+![alt text](image-335.png)
+![alt text](image-336.png)
+![alt text](image-337.png)
+![alt text](image-338.png)
+![alt text](image-339.png)
+![alt text](image-340.png)
+![alt text](image-341.png)
+![alt text](image-342.png)
+![alt text](image-343.png)
+![alt text](image-344.png)
+![alt text](image-345.png)
+![alt text](image-346.png)
+![alt text](image-347.png)
+![alt text](image-348.png)
+![alt text](image-349.png)
+![alt text](image-350.png)
+![alt text](image-351.png)
+![alt text](image-352.png)
+![alt text](image-353.png)
+![alt text](image-354.png)
+![alt text](image-355.png)
+![alt text](image-356.png)
+![alt text](image-357.png)
+![alt text](image-358.png)
+注意：在这里不能直接写`{currentDate}`,要写：`{currentDate+''}`,这算是 react 渲染的一个限制。
+![alt text](image-330.png)
+
+格式化 dayjs:
+
+之后做时间格式化：`dayjs`:
+![alt text](image-331.png)
+
+---
+
+将英文换成中文展示出来：
+![alt text](image-332.png)
+
+![alt text](image-359.png)
+![alt text](image-360.png)
+![alt text](image-361.png)
+![alt text](image-362.png)
