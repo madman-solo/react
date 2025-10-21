@@ -236,3 +236,123 @@ useImmer 特别适合复杂类型（对象、数组，尤其是嵌套结构）�
     ![alt text](image-87.png)
   - 给组件添加 Key 属性：
     ![alt text](image-88.png)
+
+---
+
+![alt text](image-104.png)
+![alt text](image-105.png)
+![alt text](image-106.png)
+![alt text](image-107.png)
+![alt text](image-108.png)
+![alt text](image-109.png)
+![alt text](image-110.png)
+![alt text](image-111.png)
+![alt text](image-112.png)
+划拉线：
+![alt text](image-113.png)
+![alt text](image-114.png)
+
+## Hooks:
+
+![alt text](image-115.png)
+![alt text](image-116.png)
+![alt text](image-117.png)
+
+### useRef
+
+![alt text](image-118.png)
+
+##### 出现定时器累加时：
+
+![alt text](image-92.png)
+
+##### 错误实现：
+
+![alt text](image-93.png)
+
+##### 正确实现（ref）：
+
+![alt text](image-94.png)
+![alt text](image-96.png)
+
+##### useRef 要写在代码顶层，不能写在逻辑中：
+
+![alt text](image-97.png)
+
+##### 在逻辑中处理原生 Dom 操作（不写 useRef）（箭头函数）：
+
+![alt text](image-95.png)
+
+#### forwardRef（添加到另一个组件身上时使用）:
+
+![alt text](image-98.png)
+即：在另一个组件中使用该 ref 对象时，必须要用 forwardRef 进行转发，才能在另一个组件中获取到该元素：
+![alt text](image-99.png)
+![alt text](image-100.png)
+
+#### useImperativeHandle:
+
+![alt text](image-101.png)
+![alt text](image-102.png)
+![alt text](image-103.png)
+即：子组件可以自定义方法，自定义 父组件通过 ref 访问子组件时 能调用的方法和属性，而不需要暴露子组件内部的完整 DOM 结构或所有状态/方法。
+
+#### 核心作用：限制暴露范围，自定义 “对外接口”
+
+当子组件通过 forwardRef 允许父组件传递 ref 时，默认情况下父组件可能直接获取到子组件的根 DOM 元素（或类组件实例），从而能调用 DOM 原生方法（如 focus、scroll 等）。
+但通过 useImperativeHandle，就可以手动定义父组件能访问的内容，避免暴露整个 DOM 或子组件的内部细节，更符合 “最小权限” 原则。
+例如：
+子组件中：
+
+```js
+import { forwardRef, useImperativeHandle, useRef } from "react";
+
+// 子组件通过 forwardRef 接收父组件的 ref
+const Child = forwardRef((props, ref) => {
+  const inputRef = useRef(null); // 子组件内部真正的 DOM ref
+
+  // 自定义父组件通过 ref 能访问的方法
+  useImperativeHandle(
+    ref,
+    () => ({
+      // 只暴露需要的方法，比如聚焦输入框
+      focusInput: () => {
+        inputRef.current.focus();
+      },
+      // 再暴露一个清空输入框的方法
+      clearInput: () => {
+        inputRef.current.value = "";
+      },
+    }),
+    []
+  ); // 依赖为空，方法不会重新创建
+
+  return <input ref={inputRef} />;
+});
+```
+
+父组件中：
+
+```js
+import { useRef } from "react";
+
+function Parent() {
+  const childRef = useRef(null);
+
+  return (
+    <div>
+      <Child ref={childRef} />
+      <button
+        onClick={() => {
+          // 父组件只能调用子组件通过 useImperativeHandle 暴露的方法
+          childRef.current.focusInput(); // 有效
+          childRef.current.clearInput(); // 有效
+          // 无法直接访问 input 的原生方法（如 childRef.current.focus() 会报错）
+        }}
+      >
+        操作子组件
+      </button>
+    </div>
+  );
+}
+```
