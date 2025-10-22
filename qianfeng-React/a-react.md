@@ -356,3 +356,72 @@ function Parent() {
   );
 }
 ```
+
+---
+
+### useEffect
+
+![alt text](image-125.png)
+![alt text](image-126.png)
+![alt text](image-127.png)
+![alt text](image-128.png)
+![alt text](image-129.png)
+![alt text](image-130.png)
+![alt text](image-124.png)
+
+##### 情况使用：
+
+- 不加依赖项--更新的时候，所有副作用都会重新触发：
+  ![alt text](image-119.png)
+- 添加依赖项：
+  ![alt text](image-120.png)
+  初始的时候，所有的都会触发；
+  更新的时候，只有对应依赖项发生改变才会重新触发。
+  内部是通过`Obiect.is()`来判断是否发生改变：
+  ![alt text](image-121.png)
+  - 当依赖项为空数组时，只会在初始时触发，后续不会重新触发。
+  - 错误写法：
+    ![alt text](image-122.png)
+
+##### 分开处理副作用依赖项的使用：
+
+![alt text](image-123.png)
+
+##### 尽量在 useEffect 内部定义函数：
+
+函数也可能成为计算变量，所以也要作为依赖项：
+第一种情况：
+
+```js
+function App() {
+  const [count, setCount] = useState(0);
+  const foo = () => {
+    console.log(count);
+  };
+  useEffect(() => {
+    foo();
+  }, [foo]); //此时Object.is(function(){},function(){})相当于是两个不同地址的函数，会被判断成false,就会继续执行useEffect,尽管foo函数中的内容并没有改变。
+  return <div>hello App</div>;
+}
+```
+
+第二种利用 useCallback()：
+
+```js
+function App() {
+  const [count, setCount] = useState(0);
+  const foo = useCallback(() => {
+    //此时的foo()函数会指向他自己，而不是重新开辟新的空间。
+    console.log(count);
+  });
+  useEffect(() => {
+    foo();
+  }, [foo]); //此时Object.is()会被判断成true,就不会继续执行。
+  return <div>hello App</div>;
+}
+```
+
+###### 改进：在内部定义：
+
+![alt text](image-132.png)
+![alt text](image-131.png)
